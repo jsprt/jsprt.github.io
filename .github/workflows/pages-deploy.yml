@@ -45,6 +45,16 @@ jobs:
           ruby-version: 3   # reads from a '.ruby-version' or '.tools-version' file if 'ruby-version' is omitted
           bundler-cache: true
           cache-version: 1
+      - name: Debug 1
+        run: echo `ls -ltr assets`
+      - name: Export drawio files to images
+        uses: rlespinasse/drawio-export-action@v2
+        with: 
+          path: assets/drawio
+          output: export
+          format: png
+      - name: Debug 2
+        run: echo `ls -ltr`
 
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
